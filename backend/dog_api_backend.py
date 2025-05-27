@@ -4,9 +4,8 @@ app = Flask(__name__)
 
 # Hello World endpoint
 @app.route('/hello', methods=['GET'])
-def get_items():
+def get_hello():
     return "hello world!"
-
 
 if __name__ == '__main__':
     app.run(debug=True)
