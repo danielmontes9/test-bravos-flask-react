@@ -26,3 +26,9 @@ This project was developed using Flask and consumes the free [Dog API](https://d
   python dog_api_backend.py
 ```
 The app will run at: http://127.0.0.1:5000/
+
+4. Run the test
+```bash
+  python test_endpoints.py
+```
+Note: Your app must be running at the same time.
