@@ -28,8 +28,8 @@ basic_endpoints = [
 ]
 
 complex_endpoints = [
-    "http://localhost:5000/group-details/<group_id>",
-    "http://localhost:5000/group-details/<group_id>/breed/<breed_id>"
+    "http://localhost:5000/group-details/8000793f-a1ae-4ec4-8d55-ef83f1f644e5",
+    "http://localhost:5000/group-details/8000793f-a1ae-4ec4-8d55-ef83f1f644e5/breed/68f47c5a-5115-47cd-9849-e45d3c378f12"
 ]
 
 def eval_resp(task_done= False, fct= 1):
