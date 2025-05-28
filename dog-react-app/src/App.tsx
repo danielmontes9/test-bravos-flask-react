@@ -1,7 +1,57 @@
 import { useState } from 'react';
 import './App.css'
 
+
+type BreedResponse = {
+  data: DocsData[],
+  links: {
+    current: string,
+    last: string,
+    next: string,
+    self: string,
+  },
+  meta: {
+    pagination: {
+      current: number,
+      last: number,
+      next: number,
+      records: number,
+    }
+  }
+}
+
+type DocsData = {
+  id: string,
+  type: string,
+  attributes: {
+    description: string,
+    female_weight: {
+      max: number,
+      min: number,
+    },
+    hypoallergenic: boolean,
+    life: {
+      max: number,
+      min: number,
+    }
+    male_weight: {
+      max: number,
+      min: number,
+    }
+    name: string,
+  }
+  relationships: {
+    group: {
+      data: {
+        id: string,
+        type: string,
+      }
+    }
+  }
+}
+
 function App() {
+  const [dogsData, setDogsData] = useState<BreedResponse | null>(null);
   const [selectedOption, setSelectedOption] = useState("");
 
   const radioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +79,10 @@ function App() {
 
     fetch(URL)
       .then((res) => res.json())
-      .then((data) => console.log("Data:", data))
+      .then((data) => {
+        console.log("Data:", data);
+        setDogsData(data);
+      })
       .catch((err) => console.error("Error:", err));
   };
 
@@ -88,6 +141,32 @@ function App() {
           </button>
         </div>
       </div>
+
+      { selectedOption == "breeds" &&
+        (
+          <div >
+            <table>
+              <thead>
+                <tr>
+                  <td>Breed</td>
+                  <td>Avg Lifespan</td>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  dogsData?.data.map((dog) => (
+                    <tr key={dog.id}>
+                      <td>{dog.attributes.name}</td>
+                      <td>{ (dog.attributes.life.max + dog.attributes.life.min) / 2 }</td>
+                    </tr>
+                  ))
+                }
+              </tbody>
+            </table>
+          </div>
+        )
+      }
+      
     </>
   )
 }
