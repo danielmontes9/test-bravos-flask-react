@@ -40,3 +40,36 @@
 .read-the-docs {
   color: #888;
 }
+
+.filter-options {
+  text-align: left;
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.opt {
+  display: flex;
+  gap: 0.5rem;
+}
+
+input[type="radio"] {
+  width: 1rem;
+}
+
+.button-container {
+  display: grid;
+  margin: 2rem 0 2rem 0;
+}
+
+@media screen and (min-width: 600px) {
+  .filter-options {
+    flex-direction: row;
+  }
+
+  .button-container {
+    display: block;
+    text-align: end;
+  }
+}
