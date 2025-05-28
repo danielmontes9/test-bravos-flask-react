@@ -16,10 +16,10 @@ def get_breeds():
             data = response.read()
             breeds = json.loads(data)
 
-        return json.dumps(breeds), 200, {'Content-Type': 'application/json'}
+        return json.dumps(breeds), 200, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}
 
     except Exception as e:
-        return json.dumps({'error': str(e)}), 500, {'Content-Type': 'application/json'}
+        return json.dumps({'error': str(e)}), 500, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}
 
 @app.route('/breeds/<breed_id>', methods=['GET'])
 def get_breed_byID(breed_id):
@@ -28,10 +28,10 @@ def get_breed_byID(breed_id):
             data = response.read()
             breeds = json.loads(data)
 
-        return json.dumps(breeds), 200, {'Content-Type': 'application/json'}
+        return json.dumps(breeds), 200, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}
 
     except Exception as e:
-        return json.dumps({'error': str(e)}), 500, {'Content-Type': 'application/json'}
+        return json.dumps({'error': str(e)}), 500, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}
 
 @app.route('/facts', methods=['GET'])
 def get_facts():
@@ -40,10 +40,10 @@ def get_facts():
             data = response.read()
             facts = json.loads(data)
 
-        return json.dumps(facts), 200, {'Content-Type': 'application/json'}
+        return json.dumps(facts), 200, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}
 
     except Exception as e:
-        return json.dumps({'error': str(e)}), 500, {'Content-Type': 'application/json'}
+        return json.dumps({'error': str(e)}), 500, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}
 
 @app.route('/groups', methods=['GET'])
 def get_groups():
@@ -52,10 +52,10 @@ def get_groups():
             data = response.read()
             groups = json.loads(data)
 
-        return json.dumps(groups), 200, {'Content-Type': 'application/json'}
+        return json.dumps(groups), 200, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}
 
     except Exception as e:
-        return json.dumps({'error': str(e)}), 500, {'Content-Type': 'application/json'}
+        return json.dumps({'error': str(e)}), 500, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}
 
 @app.route('/groups/<group_id>', methods=['GET'])
 def get_groups_byID(group_id):
@@ -64,10 +64,10 @@ def get_groups_byID(group_id):
             data = response.read()
             group = json.loads(data)
 
-        return json.dumps(group), 200, {'Content-Type': 'application/json'}
+        return json.dumps(group), 200, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}
 
     except Exception as e:
-        return json.dumps({'error': str(e)}), 500, {'Content-Type': 'application/json'}
+        return json.dumps({'error': str(e)}), 500, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}
 
 @app.route('/group-details/<group_id>', methods=['GET'])
 def get_groupDetails_byGroupID(group_id):
@@ -76,10 +76,10 @@ def get_groupDetails_byGroupID(group_id):
             data = response.read()
             group_detail = json.loads(data.decode('utf-8').replace('data', 'group_details'))
 
-        return json.dumps(group_detail), 200, {'Content-Type': 'application/json'}
+        return json.dumps(group_detail), 200, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}
 
     except Exception as e:
-        return json.dumps({'error': str(e)}), 500, {'Content-Type': 'application/json'}
+        return json.dumps({'error': str(e)}), 500, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}
 
 @app.route('/group-details/<group_id>/breed/<breed_id>', methods=['GET'])
 def get_breed_byGroupID_byBreedID(group_id, breed_id):
@@ -102,10 +102,10 @@ def get_breed_byGroupID_byBreedID(group_id, breed_id):
             'status': group_breeds.get('status', 'OK!'),
         }
 
-        return json.dumps(group_breeds), 200, {'Content-Type': 'application/json'}
+        return json.dumps(group_breeds), 200, {'Content-Type': 'application/json' , 'Access-Control-Allow-Origin': '*'}
 
     except Exception as e:
-        return json.dumps({'error': str(e)}), 500, {'Content-Type': 'application/json'}
+        return json.dumps({'error': str(e)}), 500, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}
 
 
 if __name__ == '__main__':
