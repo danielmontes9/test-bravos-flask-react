@@ -13,7 +13,7 @@ This project was developed using Flask and consumes the free [Dog API](https://d
 1. Clone the Repository
 ```bash
   git clone https://github.com/danielmontes9/test-bravos-flask-react.git
-  cd test-bravos-flask-react/backend
+  cd test-bravos-flask-react/dog-flask-app
 ```
 
 2. Install Dependencies
