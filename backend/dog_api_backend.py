@@ -21,5 +21,17 @@ def get_breeds():
     except Exception as e:
         return json.dumps({'error': str(e)}), 500, {'Content-Type': 'application/json'}
 
+@app.route('/breeds/<breed_id>', methods=['GET'])
+def get_breed_byID(breed_id):
+    try:
+        with urllib.request.urlopen(f'https://dogapi.dog/api/v2/breeds/{breed_id}') as response:
+            data = response.read()
+            breeds = json.loads(data)
+
+        return json.dumps(breeds), 200, {'Content-Type': 'application/json'}
+
+    except Exception as e:
+        return json.dumps({'error': str(e)}), 500, {'Content-Type': 'application/json'}
+
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
