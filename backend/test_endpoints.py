@@ -21,10 +21,10 @@ counter= 0
 # Define endpoints to test like this
 basic_endpoints = [
     "http://localhost:5000/breeds",
-    "http://localhost:5000/breeds/<breed_id>",
+    "http://localhost:5000/breeds/667c7359-a739-4f2b-abb4-98867671e375",
     "http://localhost:5000/facts",
     "http://localhost:5000/groups",
-    "http://localhost:5000/groups/<group_id>"
+    "http://localhost:5000/groups/8000793f-a1ae-4ec4-8d55-ef83f1f644e5"
 ]
 
 complex_endpoints = [
