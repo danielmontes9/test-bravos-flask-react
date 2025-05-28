@@ -62,9 +62,34 @@ type FactData = {
   }
 }
 
+type GroupResponse = {
+  data: GroupData[],
+  links: {
+    current: string,
+    self: string,
+  }
+}
+
+type GroupData = {
+  id: string,
+  type: string,
+  attributes: {
+    name: string,
+  },
+  relationships: {
+    breeds: {
+      data: {
+        id: string,
+        type: string,
+      }[]
+    }
+  }
+}
+
 function App() {
   const [dogsData, setDogsData] = useState<BreedResponse | null>(null);
   const [factsData, setFactsData] = useState<FactResponse | null>(null);
+  const [groupsData, setGroupsData] = useState<GroupResponse | null>(null);
   const [selectedOption, setSelectedOption] = useState("");
 
   const radioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -98,6 +123,11 @@ function App() {
 
         if (selectedOption == "facts") {
           setFactsData(data);
+          return;
+        }
+
+        if (selectedOption == "groups") {
+          setGroupsData(data);
           return;
         }
 
@@ -181,6 +211,32 @@ function App() {
         selectedOption == "facts" &&
         (
           <h4>{ factsData?.data[0]?.attributes.body }</h4>
+        )
+      }
+
+      {
+        selectedOption == "groups" &&
+        (
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <td>Group</td>
+                  <td>Breeds</td>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  groupsData?.data.map((group) => (
+                    <tr key={group.id}>
+                      <td>{group.attributes.name}</td>
+                      <td><small>{group.relationships.breeds.data.map(breed => breed.id).join(", ")}</small></td>
+                    </tr>
+                  ))
+                }
+              </tbody>
+            </table>
+          </div>
         )
       }
 
