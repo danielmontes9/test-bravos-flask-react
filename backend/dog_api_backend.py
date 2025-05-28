@@ -81,6 +81,31 @@ def get_groupDetails_byGroupID(group_id):
     except Exception as e:
         return json.dumps({'error': str(e)}), 500, {'Content-Type': 'application/json'}
 
+@app.route('/group-details/<group_id>/breed/<breed_id>', methods=['GET'])
+def get_breed_byGroupID_byBreedID(group_id, breed_id):
+    try:
+        with urllib.request.urlopen(f'https://dogapi.dog/api/v2/groups/{group_id}') as response:
+            data = response.read()
+            data = json.loads(data)
+            group_breeds = data.get('data', {}).get('relationships', {}).get('breeds', {}).get('data', [])
+            print(group_breeds)
+
+        group_breeds = [breed for breed in group_breeds if breed.get('id') == breed_id]
+        
+        if not group_breeds:
+            return json.dumps({'error': 'Breed not found in the specified group'}), 404, {'Content-Type': 'application/json'}
+        group_breeds = group_breeds[0]  # Assuming we want the first match
+        
+        group_breeds = {
+            'id': group_breeds.get('id'),
+            'type': group_breeds.get('type'),
+            'status': group_breeds.get('status', 'OK!'),
+        }
+
+        return json.dumps(group_breeds), 200, {'Content-Type': 'application/json'}
+
+    except Exception as e:
+        return json.dumps({'error': str(e)}), 500, {'Content-Type': 'application/json'}
 
 
 if __name__ == '__main__':
