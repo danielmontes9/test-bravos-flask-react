@@ -50,8 +50,21 @@ type DocsData = {
   }
 }
 
+type FactResponse = {
+  data: FactData[],
+}
+
+type FactData = {
+  id: string,
+  type: string,
+  attributes: {
+    body: string,
+  }
+}
+
 function App() {
   const [dogsData, setDogsData] = useState<BreedResponse | null>(null);
+  const [factsData, setFactsData] = useState<FactResponse | null>(null);
   const [selectedOption, setSelectedOption] = useState("");
 
   const radioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,7 +90,17 @@ function App() {
       .then((res) => res.json())
       .then((data) => {
         console.log("Data:", data);
-        setDogsData(data);
+
+        if (selectedOption == "breeds") {
+          setDogsData(data);
+          return;
+        }
+
+        if (selectedOption == "facts") {
+          setFactsData(data);
+          return;
+        }
+
       })
       .catch((err) => console.error("Error:", err));
   };
@@ -128,7 +151,8 @@ function App() {
         </div>
       </div>
 
-      { selectedOption == "breeds" &&
+      { 
+        selectedOption == "breeds" &&
         (
           <div >
             <table>
@@ -153,6 +177,13 @@ function App() {
         )
       }
       
+      {
+        selectedOption == "facts" &&
+        (
+          <h4>{ factsData?.data[0]?.attributes.body }</h4>
+        )
+      }
+
     </>
   )
 }
