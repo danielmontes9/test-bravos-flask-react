@@ -73,10 +73,6 @@ function App() {
       URL = URL + "/groups";
     }
 
-    if (selectedOption == "groups_details") {
-      URL = URL + "/groups_details";
-    }
-
     fetch(URL)
       .then((res) => res.json())
       .then((data) => {
@@ -122,16 +118,6 @@ function App() {
               value="groups"
               onChange={radioChange} />
             <label>Groups</label>
-          </div>
-
-          <div className='opt'>
-            <input 
-              type="radio" 
-              id="groups_details" 
-              name="filter_option" 
-              value="groups_details"
-              onChange={radioChange} />
-            <label>Groups Details</label>
           </div>
         </div>
 
