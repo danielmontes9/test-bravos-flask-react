@@ -69,6 +69,19 @@ def get_groups_byID(group_id):
     except Exception as e:
         return json.dumps({'error': str(e)}), 500, {'Content-Type': 'application/json'}
 
+@app.route('/group-details/<group_id>', methods=['GET'])
+def get_groupDetails_byGroupID(group_id):
+    try:
+        with urllib.request.urlopen(f'https://dogapi.dog/api/v2/groups/{group_id}') as response:
+            data = response.read()
+            group_detail = json.loads(data.decode('utf-8').replace('data', 'group_details'))
+
+        return json.dumps(group_detail), 200, {'Content-Type': 'application/json'}
+
+    except Exception as e:
+        return json.dumps({'error': str(e)}), 500, {'Content-Type': 'application/json'}
+
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
